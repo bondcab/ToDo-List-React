@@ -13,12 +13,11 @@ code {
 }
 
 .appContainer {
-  border: solid red;
   height: 100vh;
 }
 
 .headingContainer {
-  border: solid blue;
+  background-color: lightblue;
   height: 150px;
   display: flex;
   justify-content: center;
@@ -29,10 +28,13 @@ code {
   font-family: "Permanent Marker", cursive;
   font-weight: 400;
   font-style: normal;
+  background-color: white;
+  padding: 10px 20px 10px 20px;
+  border-radius: 18px;
+  cursor: pointer;
 }
 
 .addListContainer {
-  border: solid orange;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -40,11 +42,7 @@ code {
 }
 
 .addList {
-  /* border: solid green; */
-  /* width: 300px; */
-  /* height: 30px; */
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   height: 30px;
   cursor: pointer;
@@ -59,7 +57,6 @@ code {
   font-weight: 400;
   font-style: normal;
   margin-left: 5px;
-  /* border: solid red; */
   height: 30px;
 }
 
@@ -71,12 +68,11 @@ code {
 }
 
 .listsContainer {
-  border: solid purple;
   height: 70%;
+  background-color: lightblue;
 }
 
 .createListContainer {
-  border: solid yellow;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -149,9 +145,32 @@ code {
   transform: scale(105%);
 }
 
+.createButtonContainer {
+  /* border: solid red; */
+  height: 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.createListButton {
+  width: 150px;
+  background-color: blue;
+  color: white;
+  border: none;
+  font-weight: bold;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.createListButton:hover {
+  transform: scale(105%);
+}
+
 .cancelContainer {
   /* border: solid blue; */
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -170,11 +189,33 @@ code {
 }
 
 .unorderedList {
-  border: solid red;
+  /* border: solid red; */
   position: relative;
   height: 100%;
   font-family: "Permanent Marker", cursive;
   font-weight: 400;
   font-style: normal;
   cursor: pointer;
+}
+
+.lineItemContainer {
+  display: flex;
+}
+
+.bin {
+  width: 30px;
+  height: 30px;
+}
+
+.bin:hover {
+  transform: scale(106%);
+}
+
+.binContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.lineItemName {
+  width: 100%;
 }
