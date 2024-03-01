@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // Component which appears when you click 'New List'
-function CreateList({ setNewList }) {
+function CreateList({ setNewList, setToDoLists, toDoLists }) {
   // Defines the list title
   const [listTitle, setListTitle] = useState("");
   console.log("List Title: ", listTitle);
@@ -20,15 +20,11 @@ function CreateList({ setNewList }) {
       tasksArray.push(newTask);
 
       setListTasks(tasksArray);
-
-      localStorage.setItem("Current list tasks", JSON.stringify(listTasks));
+      console.log("list tasks: ", listTasks);
+      localStorage.setItem("Current list tasks", JSON.stringify(tasksArray));
       setNewTask("");
     }
   }
-
-  useEffect(() => {
-    localStorage.setItem("Current list tasks", JSON.stringify(listTasks));
-  }, [listTasks]);
 
   useEffect(() => {
     if (listTitle !== "") {
@@ -46,16 +42,21 @@ function CreateList({ setNewList }) {
     );
 
     setListTitle(localStorageTitle);
+
+    if (localStorageTasks) {
+      setListTasks(localStorageTasks);
+    }
   }, []);
 
   function handleOnCancel() {
     console.log("Cancel button clicked");
     setNewList(false);
     localStorage.removeItem("Current list tasks");
+    localStorage.removeItem("Current list title");
   }
 
-  let storedTasks = localStorage.getItem("Current list tasks");
-  let storedTasksParsed = storedTasks ? JSON.parse(storedTasks) : [];
+  // let storedTasks = localStorage.getItem("Current list tasks");
+  // let storedTasksParsed = storedTasks ? JSON.parse(storedTasks) : [];
   // console.log("Stored tasks Parsed: ", storedTasksParsed);
 
   function handleBinClick(index) {
@@ -66,11 +67,13 @@ function CreateList({ setNewList }) {
     array.splice(index, 1);
     console.log("Updated Array", array);
     setListTasks(array);
+    localStorage.setItem("Current list tasks", JSON.stringify(array));
   }
 
   // Returns an array of React elements
   let lineItems = () => {
     let items = [];
+
     for (let i = 0; i < listTasks.length; i++) {
       items.push(
         <div className="lineItemContainer" key={i}>
@@ -90,9 +93,24 @@ function CreateList({ setNewList }) {
     return items;
   };
 
+  // New list object
+  const list = {
+    name: listTitle,
+    tasks: listTasks,
+    id: toDoLists.length,
+  };
+
   function handleCreateClick() {
     console.log("Create list clicked");
     setNewList(false);
+    localStorage.removeItem("Current list tasks");
+    localStorage.removeItem("Current list title");
+    let localStorageLists = JSON.parse(localStorage.getItem("ToDo Lists"));
+    let listsArray = [...localStorageLists];
+    listsArray.push(list);
+    setToDoLists(listsArray);
+    console.log("Create list array: ", listsArray);
+    localStorage.setItem("ToDo Lists", JSON.stringify(listsArray));
   }
 
   return (
