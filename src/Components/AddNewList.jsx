@@ -1,7 +1,6 @@
 function AddNewList({ setNewList, toDoLists }) {
   function handleOnClick() {
     setNewList(true);
-    localStorage.setItem("ToDo Lists", JSON.stringify(toDoLists));
   }
   return (
     <div className="addListContainer">
