@@ -97,7 +97,6 @@ function CreateList({ setNewList, setToDoLists, toDoLists }) {
   const list = {
     name: listTitle,
     tasks: listTasks,
-    id: toDoLists.length,
   };
 
   function handleCreateClick() {
@@ -106,11 +105,16 @@ function CreateList({ setNewList, setToDoLists, toDoLists }) {
     localStorage.removeItem("Current list tasks");
     localStorage.removeItem("Current list title");
     let localStorageLists = JSON.parse(localStorage.getItem("ToDo Lists"));
-    let listsArray = [...localStorageLists];
+    let listsArray = [];
+
+    listsArray = localStorageLists ? [...localStorageLists] : [];
     listsArray.push(list);
+
     setToDoLists(listsArray);
     console.log("Create list array: ", listsArray);
     localStorage.setItem("ToDo Lists", JSON.stringify(listsArray));
+    // const checkedItems = [];
+    // localStorage.setItem("Checked Items", JSON.stringify(checkedItems));
   }
 
   return (
