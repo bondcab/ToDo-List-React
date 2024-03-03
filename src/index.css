@@ -63,21 +63,18 @@ code {
 .addIcon {
   width: 35px;
   margin-right: 5px;
-  /* border: solid red; */
   height: 30px;
 }
 
 .listsContainer {
   background-color: lightblue;
   padding: 50px;
-  /* border: solid red; */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .createListContainer {
-  /* height: 100%; */
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -88,12 +85,10 @@ code {
 
 .createListOptions {
   background-color: white;
-  /* height: 400px; */
   width: 300px;
   margin-top: 30px;
   border-radius: 12px;
   display: flex;
-  /* justify-content: center; */
   flex-direction: column;
   padding-left: 20px;
   padding-right: 20px;
@@ -101,7 +96,6 @@ code {
 }
 
 .newListForm {
-  /* border: solid blue; */
   display: flex;
   flex-direction: column;
 }
@@ -121,7 +115,6 @@ code {
 }
 
 .addTaskContainer {
-  /* border: solid blue; */
   display: flex;
   align-items: center;
   width: 100%;
@@ -139,7 +132,6 @@ code {
   font-style: normal;
   font-size: 18px;
   color: black;
-  /* border: solid red; */
 }
 
 .addTaskIcon {
@@ -154,7 +146,6 @@ code {
 }
 
 .createButtonContainer {
-  /* border: solid red; */
   height: 100px;
   display: flex;
   justify-content: center;
@@ -177,16 +168,12 @@ code {
 }
 
 .cancelContainer {
-  /* border: solid blue; */
-  /* height: 100%; */
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
 
 .cancel {
-  /* position: absolute; */
-  /* align-self: flex-end; */
   font-size: 20px;
   color: #4646465b;
 }
@@ -197,7 +184,6 @@ code {
 }
 
 .unorderedList {
-  /* border: solid red; */
   position: relative;
   height: 100%;
   font-family: "Permanent Marker", cursive;
@@ -233,7 +219,6 @@ code {
   background-color: rgb(255, 242, 96);
   min-height: 200px;
   display: flex;
-  /* justify-content: center; */
   margin: 30px;
   font-family: "Permanent Marker", cursive;
   font-weight: 400;
@@ -241,7 +226,15 @@ code {
   cursor: pointer;
   flex-direction: column;
   align-items: center;
-  /* height: 300px; */
+  word-wrap: break-word;
+  padding: 10px;
+}
+
+.listName {
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: center;
 }
 
 .lineItemContainer {
@@ -252,7 +245,6 @@ code {
 
 .listUL {
   list-style: none;
-  /* border: solid blue; */
   width: 100%;
 }
 
@@ -269,12 +261,10 @@ code {
 
 .lineItem {
   display: flex;
-  /* border: solid red; */
   width: 100%;
 }
 
 .checkboxContainer {
-  /* border: solid orange; */
   width: 100%;
   display: flex;
   justify-content: flex-end;
@@ -288,20 +278,16 @@ code {
 
 .tick {
   position: absolute;
-  /* border: solid red; */
   transform: translate(-10px, -20px);
 }
 
 .gapFill {
-  /* border: solid red; */
   width: 100%;
   height: 100%;
 }
 
 .editContainer {
-  /* border: solid blue; */
   width: 100%;
-  /* height: 30px; */
   display: flex;
   justify-content: flex-end;
 }
@@ -312,4 +298,37 @@ code {
   margin-bottom: 20px;
   margin-right: 10px;
   cursor: pointer;
+}
+
+.deleteIconContainer {
+  width: 100%;
+  height: 50px;
+}
+
+.editCancel {
+  font-size: 20px;
+  color: #4646465b;
+}
+
+.editCancel:hover {
+  color: #212529;
+  cursor: pointer;
+}
+
+.cancelEditContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.deleteListIcon {
+  width: 40px;
+  height: 35px;
+  transform: translateY(30px);
+  cursor: pointer;
+}
+
+.deleteListIcon:hover {
+  transform: translateY(30px) scale(105%);
 }
