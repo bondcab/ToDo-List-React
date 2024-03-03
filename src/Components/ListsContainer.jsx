@@ -63,6 +63,11 @@ function ListsContainer({
 
   // Function which runs when you click the edit icon
   function handleEditClick(editListName, editListTasks) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
     setEditList(true); // editList value changed to 'true' revealing the EditList component
 
     // Puts in local storage the current list title being changed
