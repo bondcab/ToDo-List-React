@@ -1,61 +1,108 @@
 import CreateList from "./CreateList";
+import EditList from "./EditList";
 import { useState, useEffect } from "react";
 
-function ListsContainer({ newList, setNewList, setToDoLists, toDoLists }) {
-  const toDoListStorage = JSON.parse(localStorage.getItem("ToDo Lists"));
-  console.log("ToDo List in Storage", toDoListStorage);
-  const [checked, setChecked] = useState([]);
+function ListsContainer({
+  newList,
+  setNewList,
+  setToDoLists,
+  toDoLists,
+  editList,
+  setEditList,
+  setEditListName,
+  editListName,
+}) {
+  let toDoListStorage = JSON.parse(localStorage.getItem("ToDo Lists")); // Variable holding the value of "ToDo Lists" in local storage
+  const [checked, setChecked] = useState([]); // useState variable holding array of tasks which have been checked
 
+  // If toDoListStorage value is null (hasnt been assigned a value yet), set its value to empty array
   if (toDoListStorage === null) {
     const checkedItems = [];
     localStorage.setItem("Checked Items", JSON.stringify(checkedItems));
   }
 
+  // Runs once on component mounting. Creates a variable holding the value of the local storage "Checked Items" array and updates useState variable "checked" to it
   useEffect(() => {
     const checkedStorage = JSON.parse(localStorage.getItem("Checked Items"));
     setChecked(checkedStorage);
+
+    const currentListTitle = JSON.parse(
+      localStorage.getItem("Current list title")
+    );
+
+    const currentListTitleEdit = JSON.parse(
+      localStorage.getItem("Current list title edit")
+    );
+
+    if (currentListTitle) {
+      setNewList(true);
+    }
+
+    if (currentListTitleEdit) {
+      setEditList(true);
+    }
   }, []);
 
-  useEffect(() => {
-    console.log("Checked: ", checked);
-  }, [checked]);
-
-  function handleUncheckedClick(list, index, task) {
-    console.log("Checkbox clicked");
-    console.log("List: ", list);
-    console.log("Task: ", task);
-    console.log("Index: ", index);
-
-    const checkedArray = [...checked];
-    checkedArray.push(`${list.name}-${task}`);
-    setChecked(checkedArray);
-    localStorage.setItem("Checked Items", JSON.stringify(checkedArray));
+  // Function which runs when you click the unchecked box icon
+  function handleUncheckedClick(list, task) {
+    const checkedArray = [...checked]; // Copy of useState variable checked put stored in variable
+    checkedArray.push(`${list.name}-${task}`); // Pushes into array list title and the task from parameters as indentifier
+    setChecked(checkedArray); // Updates useState checked variable to checkedArray
+    localStorage.setItem("Checked Items", JSON.stringify(checkedArray)); // Updates local storage "Checked Items"
   }
 
-  function handleCheckedClick(list, index, task) {
-    console.log("Checked clicked");
+  // Function which runs when you click the checked box icon
+  function handleCheckedClick(list, task) {
+    // Variable which is a copy of useState checked variable minus the task parameter
     const checkedFiltered = checked.filter(
       (taskItem) => taskItem !== `${list.name}-${task}`
     );
-    console.log("Checked filtered", checkedFiltered);
-    setChecked(checkedFiltered);
-    localStorage.setItem("Checked Items", JSON.stringify(checkedFiltered));
+    setChecked(checkedFiltered); // useState checked variable updated
+    localStorage.setItem("Checked Items", JSON.stringify(checkedFiltered)); // Updates local storage "Checked Items"
+  }
+
+  // Function which runs when you click the edit icon
+  function handleEditClick(editListName, editListTasks) {
+    setEditList(true); // editList value changed to 'true' revealing the EditList component
+
+    // Puts in local storage the current list title being changed
+    localStorage.setItem(
+      "Current list title edit",
+      JSON.stringify(editListName)
+    );
+
+    // Puts in local storage the current list tasks being changed
+    localStorage.setItem(
+      "Current list tasks edit",
+      JSON.stringify(editListTasks)
+    );
+    setEditListName(editListName);
   }
 
   return (
     <div className="listsContainer">
       {" "}
       {newList ? (
+        // If newList useState variable is true then CreateList component is visible
         <CreateList
           setNewList={setNewList}
           setToDoLists={setToDoLists}
           toDoLists={toDoLists}
         />
       ) : null}
+      {editList ? (
+        // If editList useState variable is true then CreateList component is visible
+        <EditList
+          setToDoLists={setToDoLists}
+          toDoLists={toDoLists}
+          setEditList={setEditList}
+          editListName={editListName}
+        />
+      ) : null}
       {toDoListStorage
         ? toDoListStorage.map((list) => (
             <div className="list" key={list.name}>
-              <h2>{list.name}</h2>
+              <h2 className="listName">{list.name}</h2>
               <div className="lineItemContainer">
                 <ul className="listUL">
                   {list.tasks.map((task, index) => (
@@ -74,7 +121,7 @@ function ListsContainer({ newList, setNewList, setToDoLists, toDoLists }) {
                           <div
                             className="checkbox"
                             onClick={() => {
-                              handleCheckedClick(list, index, task);
+                              handleCheckedClick(list, task);
                             }}
                           >
                             <img
@@ -87,7 +134,7 @@ function ListsContainer({ newList, setNewList, setToDoLists, toDoLists }) {
                           <div
                             className="checkbox"
                             onClick={() => {
-                              handleUncheckedClick(list, index, task);
+                              handleUncheckedClick(list, task);
                             }}
                           ></div>
                         )}
@@ -102,6 +149,7 @@ function ListsContainer({ newList, setNewList, setToDoLists, toDoLists }) {
                   alt="edit icon"
                   src="/images/edit.png"
                   className="editIcon"
+                  onClick={() => handleEditClick(list.name, list.tasks)}
                 />
               </div>
             </div>
