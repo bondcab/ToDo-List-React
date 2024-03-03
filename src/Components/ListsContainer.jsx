@@ -41,7 +41,7 @@ function ListsContainer({
     if (currentListTitleEdit) {
       setEditList(true);
     }
-  }, []);
+  }, [setEditList, setNewList]);
 
   // Function which runs when you click the unchecked box icon
   function handleUncheckedClick(list, task) {
