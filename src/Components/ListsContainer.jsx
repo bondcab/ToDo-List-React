@@ -64,7 +64,7 @@ function ListsContainer({
   // Function which runs when you click the edit icon
   function handleEditClick(editListName, editListTasks) {
     window.scrollTo({
-      top: 0,
+      top: 50,
       behavior: "smooth",
     });
 
