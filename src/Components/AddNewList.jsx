@@ -1,4 +1,5 @@
 function AddNewList({ setNewList, toDoLists }) {
+  // Reveals the CreateList component when ran
   function handleOnClick() {
     setNewList(true);
   }
