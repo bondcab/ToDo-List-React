@@ -85,81 +85,86 @@ function ListsContainer({
   }
 
   return (
-    <div className="listsContainer">
-      {" "}
-      {newList ? (
-        // If newList useState variable is true then CreateList component is visible
-        <CreateList
-          setNewList={setNewList}
-          setToDoLists={setToDoLists}
-          toDoLists={toDoLists}
-        />
-      ) : null}
-      {editList ? (
-        // If editList useState variable is true then CreateList component is visible
-        <EditList
-          setToDoLists={setToDoLists}
-          toDoLists={toDoLists}
-          setEditList={setEditList}
-          editListName={editListName}
-        />
-      ) : null}
-      {toDoListStorage
-        ? toDoListStorage.map((list) => (
-            <div className="list" key={list.name}>
-              <h2 className="listName">{list.name}</h2>
-              <div className="lineItemContainer">
-                <ul className="listUL">
-                  {list.tasks.map((task, index) => (
-                    <li key={`${list.id}-${index}`} className="lineItem">
-                      <p
-                        className={
-                          checked.includes(`${list.name}-${task}`)
-                            ? "taskStrike"
-                            : "task"
-                        }
-                      >
-                        {task}
-                      </p>
-                      <div className="checkboxContainer">
-                        {checked.includes(`${list.name}-${task}`) ? (
-                          <div
-                            className="checkbox"
-                            onClick={() => {
-                              handleCheckedClick(list, task);
-                            }}
-                          >
-                            <img
-                              alt="tick"
-                              src="/images/tick.png"
-                              className="tick"
-                            />
-                          </div>
-                        ) : (
-                          <div
-                            className="checkbox"
-                            onClick={() => {
-                              handleUncheckedClick(list, task);
-                            }}
-                          ></div>
-                        )}
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+    <div className="container">
+      <div className="listsContainer">
+        {" "}
+        {newList ? (
+          // If newList useState variable is true then CreateList component is visible
+          <CreateList
+            setNewList={setNewList}
+            setToDoLists={setToDoLists}
+            toDoLists={toDoLists}
+          />
+        ) : null}
+        {editList ? (
+          // If editList useState variable is true then CreateList component is visible
+          <EditList
+            setToDoLists={setToDoLists}
+            toDoLists={toDoLists}
+            setEditList={setEditList}
+            editListName={editListName}
+          />
+        ) : null}
+        {toDoListStorage
+          ? toDoListStorage.map((list) => (
+              <div className="list" key={list.name}>
+                <div className="pinContainer">
+                  <img alt="pin" src="/images/pin_02.png" className="pin" />
+                </div>
+                <h2 className="listName">{list.name}</h2>
+                <div className="lineItemContainer">
+                  <ul className="listUL">
+                    {list.tasks.map((task, index) => (
+                      <li key={`${list.id}-${index}`} className="lineItem">
+                        <p
+                          className={
+                            checked.includes(`${list.name}-${task}`)
+                              ? "taskStrike"
+                              : "task"
+                          }
+                        >
+                          {task}
+                        </p>
+                        <div className="checkboxContainer">
+                          {checked.includes(`${list.name}-${task}`) ? (
+                            <div
+                              className="checkbox"
+                              onClick={() => {
+                                handleCheckedClick(list, task);
+                              }}
+                            >
+                              <img
+                                alt="tick"
+                                src="/images/tick.png"
+                                className="tick"
+                              />
+                            </div>
+                          ) : (
+                            <div
+                              className="checkbox"
+                              onClick={() => {
+                                handleUncheckedClick(list, task);
+                              }}
+                            ></div>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="gapFill"></div>
+                <div className="editContainer">
+                  <img
+                    alt="edit icon"
+                    src="/images/edit.png"
+                    className="editIcon"
+                    onClick={() => handleEditClick(list.name, list.tasks)}
+                  />
+                </div>
               </div>
-              <div className="gapFill"></div>
-              <div className="editContainer">
-                <img
-                  alt="edit icon"
-                  src="/images/edit.png"
-                  className="editIcon"
-                  onClick={() => handleEditClick(list.name, list.tasks)}
-                />
-              </div>
-            </div>
-          ))
-        : null}
+            ))
+          : null}
+      </div>
     </div>
   );
 }

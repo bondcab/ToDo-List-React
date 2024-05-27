@@ -9,6 +9,9 @@ function AddNewList({ setNewList, toDoLists }) {
         <img src="/images/plus_icon.svg" alt="add symbol" className="addIcon" />
         <h2 className="newListText">New List</h2>
       </div>
+      <div className="addListBackground">
+        <h1 className="backgroundText">ToDo List App</h1>
+      </div>
     </div>
   );
 }
